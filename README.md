@@ -12,7 +12,7 @@ Yêu cầu hệ thống
     - `matplotlib`  
 
 
-- Chạy lệnh: `python main.py input.txt algorithm`. Trong đó, `algorithm` là tên thuật toán dùng để search. `input.txt` là file chứa đồ thị để search  
+- Chạy lệnh: `python main.py path algorithm`. Trong đó, `algorithm` là tên thuật toán dùng để search. `path` là đường dẫn đến file chứa đồ thị để search (thường là `../Testcase/testcase1.txt`)  
 
 - Các thuật toán dùng để search có thể xem tại file `graphUI.py`. Khi implement thêm thuật toán mới, phải add vào file `graphUI.py` để có thể chạy được tham số dòng lệnh  
 
@@ -24,3 +24,11 @@ Yêu cầu hệ thống
 - Greedy  
 - HillClamping  
 - A*  
+
+## Demo sương sương A* và UCS
+
+- Demo UCS  
+![Demo UCS](./Gif/testcase2-ucs.gif)  
+
+- Demo A*  
+![Demo A*](./Gif/testcase2-a-star.gif)
