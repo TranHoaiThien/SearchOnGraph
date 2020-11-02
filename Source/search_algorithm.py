@@ -8,6 +8,96 @@ Feel free print graph, edges to console to get more understand input.
 Do not change input parameters
 Create new function/file if necessary
 """
+def heapifyDown(heap, pos):
+    while pos < len(heap):
+        min = pos
+        left = 2*pos + 1
+        right = 2*pos + 2
+
+        if right >= len(heap):
+            if left >= len(heap):
+                return
+            else:
+                min = left
+        else:
+            if heap[left][1] < heap[right][1]:
+                min = left
+            else:
+                min = right
+
+        if heap[min][1] < heap[pos][1]:
+            heap[pos], heap[min] = heap[min], heap[pos]
+            pos = min
+        else:
+            break
+
+
+def pop(heap):
+    # print(heap)
+    rs = None
+    if len(heap) > 0:
+        rs = heap[0]
+        if len(heap) > 1:
+            heap[0] = heap.pop()
+            heapifyDown(heap, 0)
+        else:
+            heap.pop()
+    return rs
+
+
+def push(heap, item):
+    heap.append(item)
+    heapifyUp(heap, len(heap) - 1)
+
+
+def heapifyUp(heap, pos):
+    while pos > 0:
+        parent = (pos - 1) // 2
+        if heap[pos][1] < heap[parent][1]:
+            heap[pos], heap[parent] = heap[parent], heap[pos]
+            pos = parent
+        else:
+            break
+
+
+def getH(node1, node2):
+    return math.sqrt((node1[0][0] - node2[0][0])**2 + (node1[0][1] - node2[0][1])**2)
+
+
+def printPath(graph, edges, edge_id, parent, goal):
+    """
+    tô màu cam cho start
+    tô màu tím cho goal 
+    tô màu xanh cho đường đi
+    """
+    graph[goal][3] = purple
+    graphUI.updateUI()
+    sumCost = 0
+    while True:
+        if parent[goal] == -1:
+            graph[goal][3] = orange
+            graphUI.updateUI()
+            print(goal, end=' ')
+            break
+        else:
+            edges[edge_id(goal, parent[goal])][1] = green
+            graphUI.updateUI()
+            print(goal, end=' ')
+            goal = parent[goal]
+            sumCost += getH(graph[goal], graph[parent[goal]])
+    print('sum cost: ', sumCost)
+
+
+def setNodeColor(node, color):
+    node[3] = color
+    graphUI.updateUI()
+    pygame.time.delay(400)
+
+
+def setEdgeColor(edges, edge_id, node1, node2, color):
+    edges[edge_id(node1, node2)][1] = color
+    graphUI.updateUI()
+    pygame.time.delay(400)
 
 
 def BFS(graph, edges, edge_id, start, goal):
@@ -40,7 +130,38 @@ def AStar(graph, edges, edge_id, start, goal):
     """
     # TODO: your code
     print("Implement A* algorithm.")
-    pass
+
+    parent = [-1] * len(graph)
+    cost = [1000] * len(graph)
+    cost[start] = 0
+    heap = [(start, getH(graph[start], graph[goal]))]
+    setNodeColor(graph[start], red)
+
+    while True:
+        if len(heap) == 0:
+            print('k tim thay duong di')
+            return
+
+        current = pop(heap)
+        # print('curr = ', current)
+        # print('heap = ', heap)
+        print()
+        setNodeColor(graph[current[0]], yellow)
+        if current[0] == goal:
+            printPath(graph, edges, edge_id, parent, goal)
+            return
+
+        currentNode = graph[current[0]]
+        for adjNum in currentNode[1]:
+            c = cost[current[0]] + getH(graph[current[0]], graph[adjNum])
+            if graph[adjNum][3] == black or (graph[adjNum][3] == red and cost[adjNum] > c):
+                setEdgeColor(edges, edge_id, adjNum, current[0], white)
+                setNodeColor(graph[adjNum], red)
+
+                cost[adjNum] = c
+                parent[adjNum] = current[0]
+                push(heap, (adjNum, c + getH(graph[adjNum], graph[goal])))
+        setNodeColor(graph[current[0]], blue)
 
 
 def example_func(graph, edges, edge_id, start, goal):
