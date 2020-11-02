@@ -27,6 +27,15 @@ Yêu cầu hệ thống
 
 ## Demo sương sương A* và UCS
 
+- Ý nghĩa của các màu trong gif demo  
+    - Node màu đỏ: Vừa được khám phá/Vừa được add vào tập mở  
+    - Node màu vàng: Node hiện tại  
+    - Node màu xanh dương: Node đã ở trong tập đóng  
+    - Node màu cam: Node start  
+    - Node màu tím: Node goal  
+    - Đường đi màu trắng: Đường dùng để khám phá  
+    - Đường đi màu xanh lá cây: Đương đi được thuật toán trả về  
+
 - Demo UCS  
 ![Demo UCS](./Gif/testcase2-ucs.gif)  
 
