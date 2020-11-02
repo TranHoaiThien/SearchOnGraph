@@ -16,7 +16,7 @@ Yêu cầu hệ thống
 
 - Các thuật toán dùng để search có thể xem tại file `graphUI.py`. Khi implement thêm thuật toán mới, phải add vào file `graphUI.py` để có thể chạy được tham số dòng lệnh  
 
-## Các thuật toán được cài đặt (chi tiết xem tại file Report.pdf)  
+## Các thuật toán được cài đặt (chi tiết xem tại file [Report.pdf](https://github.com/baolongnguyenmac/SearchOnGraph/blob/main/Report/Report.pdf))  
 - DFS  
 - BFS  
 - Dijkstra  
