@@ -244,6 +244,43 @@ def AStar(graph, edges, edge_id, start, goal):
         setNodeColor(graph[current[0]], blue)
 
 
+def Dijkstra(graph, edges, edge_id, start, goal):
+    def getMinState(d, isVisited):
+        min = 1000
+        index = None
+        for i in range(len(d)):
+            if not isVisited[i] and min > d[i]:
+                min = d[i]
+                index = i
+        return index
+
+    isVisited = [False] * len(graph)
+    parent = [-1] * len(graph)
+    d = [1000] * len(graph)
+    d[start] = 0
+
+    current = start
+    setNodeColor(graph[current], red)
+    while current != goal:
+        current = getMinState(d, isVisited)
+        if current is None:
+            print('k tim thay duong di')
+            return
+
+        isVisited[current] = True
+        setNodeColor(graph[current], yellow)
+
+        currentNode = graph[current]
+        for adjNum in currentNode[1]:
+            if not isVisited[adjNum] and d[adjNum] > d[current] + getH(graph[adjNum], graph[current]):
+                setEdgeColor(edges, edge_id, adjNum, current, white)
+                setNodeColor(graph[adjNum], red)
+                d[adjNum] = d[current] + getH(graph[adjNum], graph[current])
+                parent[adjNum] = current
+        setNodeColor(graph[current], blue)
+    printPath(graph, edges, edge_id, parent, goal)
+
+
 def example_func(graph, edges, edge_id, start, goal):
     """
     This function is just show some basic feature that you can use your project.
