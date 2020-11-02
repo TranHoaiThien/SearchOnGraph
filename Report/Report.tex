@@ -1,0 +1,372 @@
+\documentclass[a4paper, 12pt]{article}
+
+% \usepackage{makecell}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage[T5]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage[none]{hyphenat}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage[nottoc, notlot, notlof]{tocbibind}
+% \usepackage{rotating}
+% \usepackage{tikz}
+
+\captionsetup[table]{skip=5pt}
+\pagestyle{fancy}
+\fancyhead[L]{Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM}
+\fancyhead[R]{Lớp $18\_21$}
+
+\begin{document}
+    \begin{titlepage}
+        \begin{center}
+            % \begin{table}[htbp]
+            %     \begin{center}
+            %     \begin{tabular}{cc}
+            %         \includegraphics[scale = 1]{images/Picture1.png} & \begin{tabular}[c]{@{}l@{}}Đại học Quốc gia TP.HCM\\ Trường Đại học Khoa học Tự nhiên\end{tabular}
+            %     \end{tabular}
+            %     \end{center}
+            % \end{table}
+
+            \vspace*{1cm}
+            \Large\textbf{Báo cáo đồ án \#1}\\
+
+            \vfill
+            \line(1,0){450}\\[4mm]
+            \LARGE\textbf{\MakeUppercase{Search In AI}}\\[3mm]
+            \Large{Cơ sở trí tuệ nhân tạo - Lớp 18\_21}\\[3mm]
+            \large{Sinh viên: Nguyễn Bảo Long - MSSV: 18120201}
+            \line(1,0){430}\\
+            \vfill
+
+            \vfill
+            TP Hồ Chí Minh, ngày 27/10/2020
+        \end{center}
+    \end{titlepage}
+
+    \tableofcontents
+    \thispagestyle{empty}
+    \clearpage
+
+    \section{Thông tin cá nhân}
+    \begin{enumerate}
+        \item Họ tên: Nguyễn Bảo Long
+        \item MSSV: 18120201
+        \item Email: baolongnguyen.mac@gmail.com
+    \end{enumerate}
+    \clearpage
+
+    \section{Tự đánh giá}
+    \begin{table}[H]
+        \begin{tabular}{|c|l|c|}
+        \hline
+        STT & \multicolumn{1}{c|}{Tiêu chí}                                         & Điểm \\ \hline
+        1   & Cài đặt thành công thuật toán                                         & 10   \\ \hline
+        2   & Chọn testcase cho thuật toán (bao gồm TH đặc biệt và TH thông thường) & 5    \\ \hline
+        3   & Phân tích ý tưởng thuật toán                                          & 10   \\ \hline
+        4   & Đánh giá thuật toán                                                   & 10   \\ \hline
+        5   & Nhận xét thuật toán                                                   & 8    \\ \hline
+        \multicolumn{2}{|c|}{Trung bình}                                            & 8.5  \\ \hline
+        \end{tabular}
+        \caption{Bảng tự đánh giá kết quả làm việc}
+    \end{table}
+    \clearpage
+
+    \section{Lý thuyết cơ bản về các thuật toán trong báo cáo}
+
+    \subsection{Thuật toán DFS}
+    \begin{itemize}
+        \item Ý tưởng
+        \begin{itemize}
+            \item Depth-first Search mở rộng tìm kiếm tại các node ở "sâu nhất" trong tập hợp các node đang "mở". Nghĩa là thuật toán sẽ đi vào 1 nhánh của đồ thị xa nhất có thể trước khi quay lui
+            \item Depth-first Search sử dụng 1 stack với nguyên lý LIFO trong quá trình mở rộng
+        \end{itemize}
+
+        \item Đánh giá thuật toán
+        \begin{itemize}
+            \item Gán 
+            \begin{itemize}
+                \item d = Độ sâu của cây tìm kiếm
+                \item n = Số nhánh tối đa của 1 node \\
+                $\Rightarrow$ $n^i = $ Số node tại độ cao $i$ (giả sử cây tìm kiếm là cây đầy đủ)
+            \end{itemize}
+            \item Độ phức tạp về thời gian: $T(n) = 1 + n^{2} + n^{3} + ... + n^{d} = O(n^{d})$
+            \item Độ phức tạp về không gian: $S(n) = O(nd)$
+            \item Tính đầy đủ: Thuật toán được hình thành theo tư duy vét cạn, nghĩa là khám phá mọi trường hợp có thể xảy ra. Do đó, nó có thể trả về lời giải cho bài toán nếu lời giải đó tồn tại
+            \item Tính tối ưu: Thuật toán không cho lời giải tối ưu vì chưa chắc tìm ra được đường đi ngắn nhất cho bài toán
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Thuật toán BFS}
+    \begin{itemize}
+        \item Ý tưởng
+        \begin{itemize}
+            \item Breadth-first Search mở rộng tìm kiếm tại các node ở "độ sâu nhỏ nhất" trong tập hợp các node đang "mở". Nghĩa là thuật toán sẽ đi vào tất cả các node kề với node hiện tại
+            \item Bài toán sử dụng 1 queue với nguyên lý FIFO trong quá trình mở rộng
+        \end{itemize}
+
+        \item Đánh giá thuật toán
+        \begin{itemize}
+            \item Gán 
+            \begin{itemize}
+                \item d = Độ sâu của cây tìm kiếm
+                \item s = Độ sâu của trạng thái đích
+                \item n = Số nhánh tối đa của 1 node \\
+                $\Rightarrow$ $n^i = $ Số node tại độ cao $i$ (giả sử cây tìm kiếm là cây đầy đủ)
+            \end{itemize}
+
+            \item Độ phức tạp về thời gian: $T(n) = 1 + n^2 + n^3 + ... + n^s = O(n^s)$
+            \item Độ phức tạp về không gian: $S(n) = O(n^s)$ - kích thước của hàng đợi tại độ sâu s
+            \item Tính đầy đủ: Thuật toán được hình thành theo tư duy vét cạn, nghĩa là khám phá mọi trường hợp có thể xảy ra. Do đó, nó có thể trả về lời giải cho bài toán nếu lời giải đó tồn tại
+            \item Tính tối ưu: Thuật toán sẽ đưa ra lời giải với ít trạng thái trung gian nhất
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Thuật toán UCS}
+    \begin{itemize}
+        \item Ý tưởng
+        \begin{itemize}
+            \item Khởi tạo mảng $d$: $d[node_{i}] = $ chi phí đường đi tính từ trạng thái khởi tại đến trạng thái $node_{i}$. Ban đầu, $d[node_i]$ được gán bằng giá trị $MAX\_INT$ với mọi $i$
+            \item Thuật toán chọn mở rộng vào một node nếu node đó thoả mãn $d[node] = min$
+            \item Cập nhật lại chi phí đường đi tính từ trạng thái khởi tạo sau mỗi lần mở rộng đến các node kề
+        \end{itemize}
+
+        \item Đánh giá thuật toán
+        \begin{itemize}
+            \item Gán
+            \begin{itemize}
+                \item $C^* =$ Chi phí của lời giải tối ưu
+                \item $\epsilon = $ Chi phí tối thiểu tại mỗi bước
+            \end{itemize}
+            \item Độ phức tạp về thời gian $T(n) = O(n^{C^*/\epsilon})$
+            \item Độ phức tạp về không gian $S(n) = O(n^{C^*/\epsilon})$
+            \item Tính đầy đủ: Thuật toán được hình thành theo tư duy vét cạn, nghĩa là khám phá mọi trường hợp có thể xảy ra. Do đó, nó có thể trả về lời giải cho bài toán nếu lời giải đó tồn tại
+            \item Tính tối ưu: Thuật toán trả về lời giải tối ưu nhất cho bài toán
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Thuật toán AStar}
+    \begin{itemize}
+        \item Ý tưởng
+        \begin{itemize}
+            \item Thuật toán mở rộng các node được cho là gần trạng thái đích nhất
+            \item Thuật toán đánh giá một node là gần hoặc xa so với trạng thái đích bằng hàm \textbf{heuristic}
+            \item Hàm \textbf{heuristic} của thuật toán được xây dựng như sau
+            \begin{itemize}
+                \item $f(n) = h(n) + g(n)$
+                \item $g(n) = $ Chi phí để tới được node n
+                \item $h(n) = $ Chi phí ước tính từ node n tới trạng thái đích
+            \end{itemize}
+        \end{itemize}
+
+        \item Đánh giá thuật toán
+        \begin{itemize}
+            \item Độ phức tạp về thời gian: Phụ thuộc vào heuristic được chọn. Trong trường hợp tệ nhất (không gian tìm kiếm vô tận), độ phức tạp về thời gian của thuật toán có thể lên tới $O(b^d)$
+            \begin{itemize}
+                \item Gọi $b_i$ là số cây con của một node ứng với hàm heuristic $h_i$, $d$ là độ sâu của trạng thái đích trong cây tìm kiếm
+                \item Ta có: $T(n) = 1 + b_i^2 + b_i^3 + ... + b_i^d$
+                \item Một heuristic tốt cho phép giảm giá trị $b$ xuống tối thiểu bằng 1
+                \item Người ta chứng minh được rằng hàm heuristic chấm nhận được nằm trong khoảng $$0 < h(x) \leq h(x)^*$$
+                \item Trong đó, $h(x)$ là hàm heuristic được chọn, $h(x)^*$ là chi phí thực tế
+            \end{itemize}
+            \item Độ phức tạp về không gian: Tương tự thuật toán UCS
+            \item Tính đầy đủ: Trong mọi đồ thị, nếu tồn tại một đường đi từ trạng thái ban đầu đến trạng thái đích thì thuật toán sẽ tìm được đường đi đó
+            \item Tính tối ưu: Nếu heuristic được chọn thoả mãn điều kiện nêu trên thì thuật toán chưa chắc cho ra lời giải tối ưu nhất nhưng đó là một trong số những lời giải tối ưu
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Thuật toán Dijkstra}
+    \begin{itemize}
+        \item Ý tưởng:
+        \begin{itemize}
+            \item Thuật toán sử dụng một mảng $d$ với $d(node_i) = $ đường đi ngắn nhất tính từ trạng thái khởi tạo đến trạng thái $node_i$. Do đó, ta có công thức như sau $$d(node_i) = min\{d(node_j) + w(node_i, node_j), node_j \in Adj(node_i) \}$$
+            \item Trong đó, $w(node_i, node_j)$ là chi phí đi từ $node_i$ đến $node_j$; $Adj(node_i)$ là tập hợp các dỉnh kề với $node_i$
+            \item Thông thường khi cài đặt, ta thường gán giá trị khởi tạo cho mảng d là vô cùng. Sau đó dần dần thay thế bằng các giá trị thức tế của đồ thị. Node tiếp theo được chọn để mở rộng là node có chi phí nhỏ nhất trong mảng d
+        \end{itemize}
+
+        \item Đánh giá thuật toán
+        \begin{itemize}
+            \item Độ phức tạp về thời gian: $O(n^2)$ với n là số đỉnh của đồ thị (Vì phải duyệt qua 2 lần tất cả các đỉnh của đồ thị trong 2 vòng lặp lồng nhau)
+            \item Độ phức tạp về không gian: $O(n)$ với n là số đỉnh của đồ thị (Vì chỉ lưu trữ lại chi phí ngắn nhất đi từ trạng thái khởi tạo đến các đỉnh của đồ thị)
+            \item Tính đầy đủ: Thuật toán được hình thành theo tư duy vét cạn, nghĩa là khám phá mọi trường hợp có thể xảy ra. Do đó, nó có thể trả về lời giải cho bài toán nếu lời giải đó tồn tại
+            \item Tính tối ưu: Lời giải bài toán đưa ra là tối ưu nhưng chi phí để tìm lời giải trong trường hợp bài toán có không gian trạng thái lớn là rất cao
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Thuật toán Greedy}
+    \begin{itemize}
+        \item Ý tưởng
+        \begin{itemize}
+            \item Thuật toán sử dụng hàm heuristic "$h(n)$ = Ước lượng chi phí/khoảng cách từ n đến đích" trong việc mở rộng tìm kiếm của mình
+            \item Xét tại cục bộ (bao gồm node hiện tại và các node kề nó trong đồ thị), Greedy chọn đường đi có $h(n)$ là nhỏ nhất
+        \end{itemize}
+        \item Đánh giá thuật toán
+        \begin{itemize}
+            \item Độ phức tạp về thời gian trong trường hơp tệ nhất: $O(b^m)$ với m là độ sâu tối đa của cây tìm kiếm. Có thể cải thiện bằng cách chọn hàm heuristic tốt hơn
+            \item Độ phức tạp về không gian trong trường hợp tệ nhất: Tương tự độ phức tạp về thời gian
+            \item Tính đầy đủ: Thuật toán có thể không tìm được câu trả lời cho bài toán. Trong trường hợp quản lý không tốt các trạng thái đã đi qua, Greedy có thể rơi vào tình huống vòng lặp vô tận
+            \item Tính tối ưu: Thuật toán không quan tâm đến chi phí tính từ trạng thái khởi tạo đến trạng thái hiện tại mà chỉ quan tâm đến chi phí/khoảng cách từ trạng thái tiếp theo đến trạng thái đích nên chỉ cho lời giải tối ưu trong trường hợp chi phí giữa các trạng thái là như nhau.
+        \end{itemize}
+    \end{itemize}
+    \clearpage
+
+    \section{Điểm khác nhau giữa UCS và AStar} 
+    Điểm khác nhau dễ thấy nhất giữa 2 thuật toán UCS và A* là sự có mặt của hàm heuristic $h(node)$ trong thuật toán A*. Hàm này cung cấp cho thuật toán một thông tin quan trọng: Tại $node_i$, $h(node_i)$ ước lượng chi phí/khoảng cách từ $node_i$ đến trạng thái đích. Do đó, ta phân A* vào nhóm các thuật toán tìm kiếm có thông tin còn UCS được phân vào nhóm các thuật toán tìm kiếm mù.\\\\
+    Các điểm khác nhau còn lại có thể kể đến như
+    \begin{itemize}
+        \item Độ phức tạp về thời gian: Trong trường hợp chọn được hàm heuristic chấp nhận được, độ phức tạp về thời gian của thuật toán A* có thể thấp hơn nhiều lần so với thuật toán UCS
+        \item Ý tưởng tìm đường đi của 2 thuật toán đều dựa vào cùng 1 hàm $f(n)$ nhưng cách triển khai hàm $f(n)$ của 2 thuật toán là khác nhau
+        \begin{itemize}
+            \item UCS sử dụng hàm chi phí $g(n)$ làm tiêu chí chọn nước đi tiếp theo. Do đó ta được $f_{UCS}(n) = g(n)$
+            \item A* sử dụng tổng của hàm chi phí và hàm heuristic làm tiêu chí chọn nước đi tiếp theo. Do đó ta được $f_{A*}(n) = h(n) + g(n)$
+        \end{itemize}
+    \end{itemize}
+    \clearpage
+
+    \section{Chi tiết cài đặt}
+    \subsection{Testcase chung}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.35]{images/test1.png}
+            \caption{Testcase chung cho các thuật toán (testcase1)}
+        \end{center}
+    \end{figure}
+
+    \subsection{Thuật toán DFS}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.35]{images/tes1_dfs.png}
+            \caption{Kết quả tesecase1 của thuật toán DFS}
+        \end{center}
+    \end{figure}
+    \begin{itemize}
+        \item Thuật toán không quan tâm đến chi phí đường đi 
+        \item Không có thông tin về trạng thái đích trong quá trình tìm kiếm
+        \item Có thể khắc phục tính đầy đủ của thuật toán bằng cách đặt giới hạn độ sâu trong giải thuật
+    \end{itemize}
+
+    \subsection{Thuật toán BFS}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.35]{images/test1_bfs.png}
+            \caption{Kết quả tesecase1 của thuật toán BFS}
+        \end{center}
+    \end{figure}
+    \begin{itemize}
+        \item Thuật toán không quan tâm đến chi phí đường đi
+        \item Không có thông tin về trạng thái đích trong quá trình tìm kiếm
+        \item Cách sử dụng bộ nhớ của thuật toán không hiệu quả bằng DFS
+    \end{itemize}
+
+    \subsection{Thuật toán UCS}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.35]{images/test1_ucs.png}
+            \caption{Kết quả tesecase1 của thuật toán UCS}
+            \includegraphics[scale = 0.35]{images/test2_ucs.png}
+            \caption{Kết quả tesecase2 của thuật toán UCS}
+        \end{center}
+    \end{figure}
+    \begin{itemize}
+        \item Không có thông tin về trạng thái đích trong quá trình tìm kiếm
+        \item Trong một vài trường hợp, độ phức tạp của thuật toán có thể lớn hơn độ phức tạp của BFS
+    \end{itemize}
+
+    \subsection{Thuật toán AStar}
+    \begin{itemize}
+        \item Thuật toán chạy có tốt hay không phụ thuộc hoàn toán vào cách chọn hàm heuristic
+        \item Có 3 loại khoảng cách cần cân nhắc khi chọn hàm heuristic cho thuật toán
+        \begin{itemize}
+            \item Khoảng cách Manhattan
+            \begin{itemize}
+                \begin{figure}[H]
+                    \includegraphics[scale = 0.6]{images/manhattan.png}
+                    \caption{Khoảng cách Manhattan}
+                \end{figure}
+                \item Áp dụng cho trường hợp chỉ có thể di chuyển theo 4 hướng (trái, phải, trên, dưới)
+                \item $h = |current\_cell.x - goal\_cell.x|+ |current\_cell.y - goal\_cell.y|$
+            \end{itemize}
+
+            \item Khoảng cách Diagonal
+            \begin{itemize}
+                \begin{figure}[H]
+                    \includegraphics[scale = 0.6]{images/diagonal.png}
+                    \caption{Khoảng cách Diaginal}
+                \end{figure}
+                \item Áp dụng cho trường hợp có thể di chuyển theo 8 hướng (trái, phải, trên, dưới và đường chéo)
+                \item $h = \{|current\_cell.x - goal\_cell.x|, |current\_cell.y - goal\_cell.y|\}$
+            \end{itemize}
+
+            \item Khoảng cách Euclidean
+            \begin{itemize}
+                \begin{figure}[H]
+                    \includegraphics[scale = 0.6]{images/euclidean.png}
+                    \caption{Khoảng cách Euclidean}
+                \end{figure}
+                \item Áp dụng cho trường hợp có thể di chuyển theo hướng bất kỳ
+                \item $h = \sqrt{(current\_cell.x - goal\_cell.x)^2 + (current\_cell.y - goal\_cell.y)^2}$
+            \end{itemize}
+        \end{itemize}
+
+        \item Vì bài toán hiện tại có thể di chuyển theo hướng bất kỳ (miễn là thoả mãn đồ thị) nên hàm heuristic được chọn là khoảng cách Euclidean
+        \item Testcase
+        \begin{figure}[H]
+            \begin{center}
+                \includegraphics[scale = 0.35]{images/test1_a_star.png}
+                \caption{Kết quả tesecase1 của thuật toán A*}
+                \includegraphics[scale = 0.35]{images/test2_a_star.png}
+                \caption{Kết quả tesecase2 của thuật toán A*}
+            \end{center}
+        \end{figure}
+    \end{itemize}
+
+    \subsection{Thuật toán Dijkstra}
+    \begin{itemize}
+        \item Dijkstra tìm đường đi ngắn nhất từ trạng thái đầu đến toán bộ trạng thái có trong không gian trạng thái. Do đó, thuật toán này là không khả thi trong trường hợp không gian trạng thái rất lớn
+        \item Có thể thấy được trong 2 testcase bên dưới, thuật toán mở rộng toàn bộ đồ thị để có thể tìm ra được đường đi ngắn nhất
+        \begin{figure}[H]
+            \begin{center}
+                \includegraphics[scale = 0.35]{images/test1_dijkstra.png}
+                \caption{Kết quả tesecase1 của thuật toán Dijkstra}
+                \includegraphics[scale = 0.35]{images/test2_dijkstra.png}
+                \caption{Kết quả tesecase2 của thuật toán Dijkstra}
+            \end{center}
+        \end{figure}
+    \end{itemize}
+
+    \subsection{Thuật toán Greedy}
+    \begin{itemize}
+        \item Do vật, thuật toán có xu hướng cho ra kết quả trong thời gian nhanh nhất nhưng không phải lúc nào cũng là tốt nhất
+        \item Thuật toán không quan tâm đến chi phí tính từ trạng thái khởi tạo đến trạng thái hiện tại mà chỉ quan tâm đến việc node tiếp theo gần đích hay không
+        \item Trong trường hợp xấu, vì tính tham lam của mình, thuật toán có thể đi vào ngõ cụt. Trường hợp này không được minh hoạ trong testcase do giới hạn của người cài đặt và tính ngẫu nhiên trong việc chọn vị trí vẽ node trên đồ thị của source thuật toán
+        \item Sự tham lam này khác với cách chọn node để đi tiếp của thuật toán Hill Clamping (xét trên cùng 1 heuristic)
+        \begin{itemize}
+            \item Thuật toán Hill Clamping chọn node tiếp theo trong tập hợp các node kề. Điều kiện chọn là node tiếp theo đó phải tốt nhất trong tất cả các node kề và phải tốt hơn trạng thái hiện tại. Nếu không chọn ra được node thoả tính chất đó, thuật toán sẽ kết luận không tìm được lời giải bất chấp việc bài toán có tồn tại lời giải hay không
+            \item Thuật toán Greedy cũng chọn vị trí tốt nhất ở cục bộ để đi tiếp nhưng dù cho vị trí đi tiếp đó có tệ hơn vị trí hiện tại thì thuật toán vẫn cứ đi vào
+        \end{itemize}
+        \item Testcase
+        \begin{figure}[H]
+            \begin{center}
+                \includegraphics[scale = 0.35]{images/test1_greedy.png}
+                \caption{Kết quả tesecase1 của thuật toán Greedy}
+                \includegraphics[scale = 0.35]{images/test2_greedy.png}
+                \caption{Kết quả tesecase2 của thuật toán Greedy}
+            \end{center}
+        \end{figure}
+    \end{itemize}
+    \clearpage
+
+    \section{Tài liệu tham khảo}
+    \begin{enumerate}
+        \item \url{https://vi.wikipedia.org/wiki/Thuật_toán_Dijkstra}
+        \item \url{https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm}
+        \item \url{https://www.geeksforgeeks.org/a-search-algorithm/}
+        \item \url{https://www.geeksforgeeks.org/search-algorithms-in-ai/}
+        \item \url{https://www.massey.ac.nz/~mjjohnso/notes/59302/l04.html}
+    \end{enumerate}
+
+\end{document}
