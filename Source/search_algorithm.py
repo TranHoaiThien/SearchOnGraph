@@ -122,7 +122,35 @@ def UCS(graph, edges, edge_id, start, goal):
     """
     # TODO: your code
     print("Implement Uniform Cost Search algorithm.")
-    pass
+
+    parent = [-1] * len(graph)
+    cost = [1000] * len(graph)
+    cost[start] = 0
+    heap = [(start, 0)]
+    setNodeColor(graph[start], red)
+
+    while True:
+        if len(heap) == 0:
+            print('k tim thay duong di')
+            return
+
+        current = pop(heap)
+        setNodeColor(graph[current[0]], yellow)
+        if current[0] == goal:
+            printPath(graph, edges, edge_id, parent, goal)
+            return
+
+        currentNode = graph[current[0]]
+        for adjNum in currentNode[1]:
+            c = cost[current[0]] + getH(graph[current[0]], graph[adjNum])
+            if graph[adjNum][3] == black or (graph[adjNum][3] == red and cost[adjNum] > c):
+                setEdgeColor(edges, edge_id, adjNum, current[0], white)
+                setNodeColor(graph[adjNum], red)
+
+                cost[adjNum] = c
+                parent[adjNum] = current[0]
+                push(heap, (adjNum, c))
+        setNodeColor(graph[current[0]], blue)
 
 def AStar(graph, edges, edge_id, start, goal):
     """
