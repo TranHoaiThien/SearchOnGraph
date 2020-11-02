@@ -106,7 +106,33 @@ def BFS(graph, edges, edge_id, start, goal):
     """
     # TODO: your code
     print("Implement BFS algorithm.")
-    pass
+
+    queue = [start]
+    explored = []
+    parent = [-1] * len(graph)
+
+    while True:
+        if len(queue) == 0:
+            print('k tim thay duong di')
+            return
+
+        current = queue.pop(0)
+        setNodeColor(graph[current], yellow)
+        explored.append(current)
+
+        currentNode = graph[current]
+        for adjNum in currentNode[1]:
+            if adjNum not in queue and adjNum not in explored:
+                setEdgeColor(edges, edge_id, adjNum, current, white)
+                setNodeColor(graph[adjNum], red)
+                if adjNum == goal:
+                    parent[adjNum] = current
+                    printPath(graph, edges, edge_id, parent, goal)
+                    return
+                else:
+                    queue.append(adjNum)
+                    parent[adjNum] = current
+        setNodeColor(graph[current], blue)
 
 
 def DFS(graph, edges, edge_id, start, goal):
@@ -114,7 +140,33 @@ def DFS(graph, edges, edge_id, start, goal):
     DFS search
     """
     print("Implement DFS algorithm.")
-    pass
+
+    stack = [start]
+    explored = []
+    parent = [-1] * len(graph)
+
+    while True:
+        if len(stack) == 0:
+            print('k tim thay duong di')
+            return
+
+        current = stack.pop()
+        setNodeColor(graph[current], yellow)
+        explored.append(current)
+
+        currentNode = graph[current]
+        for adjNum in currentNode[1]:
+            if adjNum not in stack and adjNum not in explored:
+                setEdgeColor(edges, edge_id, adjNum, current, white)
+                setNodeColor(graph[adjNum], red)
+                if adjNum == goal:
+                    parent[adjNum] = current
+                    printPath(graph, edges, edge_id, parent, goal)
+                    return
+                else:
+                    stack.append(adjNum)
+                    parent[adjNum] = current
+        setNodeColor(graph[current], blue)
 
 def UCS(graph, edges, edge_id, start, goal):
     """
