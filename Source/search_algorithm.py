@@ -281,6 +281,47 @@ def Dijkstra(graph, edges, edge_id, start, goal):
     printPath(graph, edges, edge_id, parent, goal)
 
 
+def pickTheBestLocally(neighbors):
+    min = 1000
+    index = None
+    for neighbor in neighbors:
+        if neighbor[1] < min:
+            index = neighbor
+            min = neighbor[1]
+    return index
+
+
+def HillClamping(graph, edges, edge_id, start, goal):
+    isVisited = [False] * len(graph)
+    parent = [-1] * len(graph)
+
+    current = start
+    setNodeColor(graph[current], red)
+
+    while current != goal:
+        setNodeColor(graph[current], yellow)
+
+        isVisited[current] = True
+        currentNode = graph[current]
+        neighbors = []
+        for adjNum in currentNode[1]:
+            if not isVisited[adjNum]:
+                setEdgeColor(edges, edge_id, adjNum, current, white)
+                setNodeColor(graph[adjNum], red)
+
+                parent[adjNum] = current
+                neighbors.append((adjNum, getH(graph[adjNum], graph[goal])))
+        nextNode = pickTheBestLocally(neighbors)
+        setNodeColor(graph[current], blue)
+
+        if nextNode is None or nextNode[1] > getH(graph[current], graph[goal]):
+            print('k tim duoc duong di')
+            return
+        else:
+            current = nextNode[0]
+    printPath(graph, edges, edge_id, parent, goal)
+
+
 def example_func(graph, edges, edge_id, start, goal):
     """
     This function is just show some basic feature that you can use your project.
